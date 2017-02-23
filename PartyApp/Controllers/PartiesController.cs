@@ -28,6 +28,7 @@ namespace PartyApp.Controllers
 
         [Authorize]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(PartyFormViewModel model)
         {
             if (!ModelState.IsValid)

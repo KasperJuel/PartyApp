@@ -6,6 +6,7 @@
 <h2>Opret en Fest</h2>
 @using (Html.BeginForm("Create", "Parties"))
 {
+    @Html.AntiForgeryToken()
     <form>
         <div class="form-group">
             @Html.LabelFor(m => m.Location)
