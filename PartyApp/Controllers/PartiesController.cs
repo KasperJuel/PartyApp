@@ -1,5 +1,7 @@
-﻿using PartyApp.Models;
+﻿using Microsoft.AspNet.Identity;
+using PartyApp.Models;
 using PartyApp.ViewModels;
+using System;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -14,6 +16,7 @@ namespace PartyApp.Controllers
             _context = new ApplicationDbContext();
         }
 
+        [Authorize]
         public ActionResult Create()
         {
             var model = new PartyFormViewModel
@@ -22,6 +25,24 @@ namespace PartyApp.Controllers
             };
 
             return View(model);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult Create(PartyFormViewModel model)
+        {
+            var party = new Party
+            {
+                UserId = User.Identity.GetUserId(),
+                DateTime = DateTime.Parse(string.Format("{0} {1}", model.Date, model.Time)),
+                PartyTypeId = model.PartyType,
+                Location = model.Location
+            };
+
+            _context.Parties.Add(party);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }

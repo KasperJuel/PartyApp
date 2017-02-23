@@ -1,27 +1,28 @@
 ﻿@model PartyApp.ViewModels.PartyFormViewModel
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Opret";
 }
 
 <h2>Opret en Fest</h2>
-
-<form>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Location)
-        @Html.TextBoxFor(m => m.Location, new { @class = "form-control" })
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Date)
-        @Html.TextBoxFor(m => m.Date, new { @class = "form-control" })
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Time)
-        @Html.TextBoxFor(m => m.Time, new { @class = "form-control" })
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.PartyType)
-        @Html.DropDownListFor(m => m.Time, new SelectList(Model.PartyTypes, "Id", "Name"), "", new { @class = "form-control" })
-
-    </div>
-    <button type="submit" class="btn btn-primary">Opret</button>
-</form>
+@using (Html.BeginForm("Create", "Parties"))
+{
+    <form>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Location)
+            @Html.TextBoxFor(m => m.Location, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Date)
+            @Html.TextBoxFor(m => m.Date, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Time)
+            @Html.TextBoxFor(m => m.Time, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.PartyType)
+            @Html.DropDownListFor(m => m.PartyType, new SelectList(Model.PartyTypes, "Id", "Name"), "", new { @class = "form-control" })
+        </div>
+        <button type="submit" class="btn btn-primary">Opret</button>
+    </form>
+}

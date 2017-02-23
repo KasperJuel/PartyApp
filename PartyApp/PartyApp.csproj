@@ -186,6 +186,10 @@
     <Compile Include="Migrations\201702230908217_PopulatePartyTypesTable.Designer.cs">
       <DependentUpon>201702230908217_PopulatePartyTypesTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702230927593_AddFKPropertiesToPartyModel.cs" />
+    <Compile Include="Migrations\201702230927593_AddFKPropertiesToPartyModel.Designer.cs">
+      <DependentUpon>201702230927593_AddFKPropertiesToPartyModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -274,6 +278,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201702230908217_PopulatePartyTypesTable.resx">
       <DependentUpon>201702230908217_PopulatePartyTypesTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702230927593_AddFKPropertiesToPartyModel.resx">
+      <DependentUpon>201702230927593_AddFKPropertiesToPartyModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

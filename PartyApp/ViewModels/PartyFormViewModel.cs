@@ -8,7 +8,7 @@ namespace PartyApp.ViewModels
         public string Location { get; set; }
         public string Date { get; set; }
         public string Time { get; set; }
-        public int PartyType { get; set; }
+        public byte PartyType { get; set; }
         public IEnumerable<PartyType> PartyTypes { get; set; }
     }
 }
