@@ -1,4 +1,8 @@
-﻿body {
+﻿* {
+    /*box-sizing: border-box;*/
+}
+
+body {
     padding-top: 90px;
     padding-bottom: 20px;
 }
@@ -22,6 +26,7 @@ select,
 textarea {
     max-width: 280px;
 }
+
 
 
 .parties {
@@ -59,4 +64,5 @@ textarea {
 
 .parties > li .details .user {
     font-size: 13px;
+    padding-top: 11px;
 }

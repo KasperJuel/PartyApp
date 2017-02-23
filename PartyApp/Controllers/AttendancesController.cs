@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
+using PartyApp.Dtos;
 using PartyApp.Models;
 using System.Linq;
 using System.Web.Http;
@@ -16,16 +17,16 @@ namespace PartyApp.Controllers.Api
         }
 
         [HttpPost]
-        public IHttpActionResult Attend([FromBody]int partyId)
+        public IHttpActionResult Attend(AttendanceDto dto)
         {
             var userId = User.Identity.GetUserId();
 
-            if (_context.Attendances.Any(a => a.AttendeeId == userId && a.PartyId == partyId))
+            if (_context.Attendances.Any(a => a.AttendeeId == userId && a.PartyId == dto.PartyId))
                 return BadRequest("Deltageren findes allerede.");
 
             var attendance = new Attendance
             {
-                PartyId = partyId,
+                PartyId = dto.PartyId,
                 AttendeeId = userId
             };
 

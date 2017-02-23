@@ -24,7 +24,29 @@
                 <span class="user">
                     Afholdes af: @party.User.Name
                 </span>
+                <button class="btn btn-default btn-sm pull-right" id="toggle-attendance" data-party-id="@party.Id">Deltag?</button>
             </div>
         </li>
     }
 </ul>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $("#toggle-attendance").click(function (e) {
+                var button = $(e.target);
+
+                $.post("/api/attendances", { partyId: button.attr("data-party-id")})
+                .done(function () {
+                    button
+                        .removeClass("btn-default")
+                        .addClass("btn-info")
+                        .text("Deltager");
+                })
+                .fail(function () {
+                    alert("Noget gik galt.");
+                });
+            })
+        });
+    </script>
+}
