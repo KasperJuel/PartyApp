@@ -190,6 +190,10 @@
     <Compile Include="Migrations\201702230927593_AddFKPropertiesToPartyModel.Designer.cs">
       <DependentUpon>201702230927593_AddFKPropertiesToPartyModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702231202161_AddNameToApplicationUser.cs" />
+    <Compile Include="Migrations\201702231202161_AddNameToApplicationUser.Designer.cs">
+      <DependentUpon>201702231202161_AddNameToApplicationUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -326,6 +330,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201702230927593_AddFKPropertiesToPartyModel.resx">
       <DependentUpon>201702230927593_AddFKPropertiesToPartyModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702231202161_AddNameToApplicationUser.resx">
+      <DependentUpon>201702231202161_AddNameToApplicationUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
