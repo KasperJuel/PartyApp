@@ -30,10 +30,16 @@ namespace PartyApp.Controllers
         [HttpPost]
         public ActionResult Create(PartyFormViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                model.PartyTypes = _context.PartyTypes.ToList();
+                return View("Create", model);
+            }
+
             var party = new Party
             {
                 UserId = User.Identity.GetUserId(),
-                DateTime = model.DateTime,
+                DateTime = model.GetDateTime(),
                 PartyTypeId = model.PartyType,
                 Location = model.Location
             };
