@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using PartyApp.Models;
 using PartyApp.ViewModels;
-using System;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -34,7 +33,7 @@ namespace PartyApp.Controllers
             var party = new Party
             {
                 UserId = User.Identity.GetUserId(),
-                DateTime = DateTime.Parse(string.Format("{0} {1}", model.Date, model.Time)),
+                DateTime = model.DateTime,
                 PartyTypeId = model.PartyType,
                 Location = model.Location
             };
