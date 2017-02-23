@@ -3,9 +3,26 @@
     ViewBag.Title = "Home Page";
 }
 
-<ul>
+<ul class="parties">
     @foreach (var party in Model)
     {
-        <li>@party.DateTime - @party.User.Name</li>
+        <li>
+            <div class="date">
+                <div class="day">
+                    @party.DateTime.ToString("d ")
+                </div>
+                <div class="month">
+                    @party.DateTime.ToString("MMM")
+                </div>
+            </div>
+            <div class="details">
+                <span class="party-type">
+                    @party.PartyType.Name
+                </span>
+                <span class="user">
+                    Afholdes af: @party.User.Name
+                </span>
+            </div>
+        </li>
     }
 </ul>

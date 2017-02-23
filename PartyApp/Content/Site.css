@@ -1,5 +1,5 @@
 ﻿body {
-    padding-top: 50px;
+    padding-top: 90px;
     padding-bottom: 20px;
 }
 
@@ -21,4 +21,42 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+
+
+.parties {
+    list-style: none;
+}
+
+.parties > li {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.parties > li .date {
+    width: 60px;
+    background-color:#000;
+    color: #fff;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 2px 6px;
+}
+
+.parties > li .date .month {
+    font-weight: bold;
+}
+
+.parties > li .details {
+    position: absolute;
+    top: 0;
+    left: 70px;
+}
+
+.parties > li .details .party-type {
+    font-weight: bold;
+    display: block;
+}
+
+.parties > li .details .user {
+    font-size: 13px;
 }

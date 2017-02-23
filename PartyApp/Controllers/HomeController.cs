@@ -19,6 +19,7 @@ namespace PartyApp.Controllers
         {
             var upcomingParties = _context.Parties
                 .Include(p => p.User)
+                .Include(p => p.PartyType)
                 .Where(p => p.DateTime > DateTime.Now);
 
             return View(upcomingParties);
