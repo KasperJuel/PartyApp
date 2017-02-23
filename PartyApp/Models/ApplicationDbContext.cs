@@ -8,6 +8,7 @@ namespace PartyApp.Models
     {
         public DbSet<Party> Parties { get; set; }
         public DbSet<PartyType> PartyTypes { get; set; }
+        public DbSet<Attendance> Attendances { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
@@ -17,6 +18,15 @@ namespace PartyApp.Models
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Attendance>()
+                .HasRequired(a => a.Party)
+                .WithMany().WillCascadeOnDelete(false);
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
