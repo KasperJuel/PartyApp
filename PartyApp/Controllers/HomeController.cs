@@ -1,4 +1,5 @@
 ﻿using PartyApp.Models;
+using PartyApp.ViewModels;
 using System;
 using System.Data.Entity;
 using System.Linq;
@@ -22,7 +23,14 @@ namespace PartyApp.Controllers
                 .Include(p => p.PartyType)
                 .Where(p => p.DateTime > DateTime.Now);
 
-            return View(upcomingParties);
+            var model = new PartiesViewModel
+            {
+                UpcomingParties = upcomingParties,
+                ShowActions = User.Identity.IsAuthenticated,
+                Heading = "Kommende Fester"
+            };
+
+            return View("Parties", model);
         }
     }
 }

@@ -1,10 +1,10 @@
-﻿@model IEnumerable<PartyApp.Models.Party>
+﻿@model PartyApp.ViewModels.PartiesViewModel
 @{
     ViewBag.Title = "Home Page";
 }
-
+<h1>@Model.Heading</h1>
 <ul class="parties">
-    @foreach (var party in Model)
+    @foreach (var party in Model.UpcomingParties)
     {
         <li>
             <div class="date">
@@ -20,11 +20,18 @@
             <div class="details">
                 <span class="party-type">
                     @party.PartyType.Name
+                    @if (Model.ShowActions)
+                    {
+                        <button class="btn btn-default btn-sm pull-right" id="toggle-attendance" data-party-id="@party.Id">Deltag?</button>
+                    }
                 </span>
                 <span class="user">
                     Afholdes af: @party.User.Name
+                    @if (Model.ShowActions)
+                    {
+                        <button class="btn btn-link btn-sm" id="toggle-follow" data-user-id="@party.UserId">Follow</button>
+                    }
                 </span>
-                <button class="btn btn-default btn-sm pull-right" id="toggle-attendance" data-party-id="@party.Id">Deltag?</button>
             </div>
         </li>
     }
@@ -36,7 +43,7 @@
             $("#toggle-attendance").click(function (e) {
                 var button = $(e.target);
 
-                $.post("/api/attendances", { partyId: button.attr("data-party-id")})
+                $.post("/api/attendances", { partyId: button.attr("data-party-id") })
                 .done(function () {
                     button
                         .removeClass("btn-default")
@@ -46,7 +53,19 @@
                 .fail(function () {
                     alert("Noget gik galt.");
                 });
-            })
+            });
+
+            $("#toggle-follow").click(function (e) {
+                var button = $(e.target);
+
+                $.post("/api/followings", { followeeId: button.attr("data-user-id") })
+                .done(function () {
+                    button.text("Following");
+                })
+                .fail(function () {
+                    alert("Noget gik galt.");
+                });
+            });
         });
     </script>
 }
