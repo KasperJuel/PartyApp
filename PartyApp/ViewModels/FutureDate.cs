@@ -15,7 +15,7 @@ namespace FindFesten.ViewModels
                 DateTimeStyles.None,
                 out dateTime);
 
-            return (isValid && dateTime > DateTime.Now);
+            return (isValid && dateTime >= DateTime.Today);
         }
     }
 }
