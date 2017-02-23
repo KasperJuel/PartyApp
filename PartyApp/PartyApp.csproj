@@ -177,10 +177,17 @@
     <Compile Include="Migrations\201702230852235_InitialMigration.Designer.cs">
       <DependentUpon>201702230852235_InitialMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702230905439_CreatePartyTable.cs" />
+    <Compile Include="Migrations\201702230905439_CreatePartyTable.Designer.cs">
+      <DependentUpon>201702230905439_CreatePartyTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ApplicationDbContext.cs" />
+    <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Party.cs" />
+    <Compile Include="Models\PartyType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -254,6 +261,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201702230852235_InitialMigration.resx">
       <DependentUpon>201702230852235_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702230905439_CreatePartyTable.resx">
+      <DependentUpon>201702230905439_CreatePartyTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
