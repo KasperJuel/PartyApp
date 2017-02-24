@@ -1,0 +1,34 @@
+﻿@model IEnumerable<PartyApp.Models.Party>
+@{
+    ViewBag.Title = "Mine Fester";
+}
+
+<h2>Mine Fester</h2>
+
+<ul class="parties">
+    @foreach (var party in Model)
+    {
+        <li>
+            <div class="date">
+                <div>
+                    <div class="day">
+                        @party.DateTime.ToString("d ")
+                    </div>
+                </div>
+                <div class="month">
+                    @party.DateTime.ToString("MMM")
+                </div>
+            </div>
+            <div class="details">
+                <span class="party-type">
+                    @party.PartyType.Name
+                        <button class="btn btn-default btn-sm pull-right" id="toggle-attendance" data-party-id="@party.Id">Deltag?</button>
+                </span>
+                <span class="user">
+                    By: @party.Location
+                    <button class="btn btn-link btn-sm" id="toggle-follow" data-user-id="@party.UserId">Follow</button>
+                </span>
+            </div>
+        </li>
+    }
+</ul>

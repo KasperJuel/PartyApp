@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
 using PartyApp.Models;
 using PartyApp.ViewModels;
+using System;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
@@ -22,11 +23,11 @@ namespace PartyApp.Controllers
             var userId = User.Identity.GetUserId();
 
             var parties = _context.Attendances
-                    .Where(a => a.AttendeeId == userId)
-                    .Select(a => a.Party)
-                    .Include(p => p.User)
-                    .Include(p => p.PartyType)
-                    .ToList();
+                .Where(a => a.AttendeeId == userId)
+                .Select(a => a.Party)
+                .Include(p => p.User)
+                .Include(p => p.PartyType)
+                .ToList();
 
             var model = new PartiesViewModel()
             {
@@ -36,6 +37,19 @@ namespace PartyApp.Controllers
             };
 
             return View("Parties", model);
+        }
+
+        [Authorize]
+        public ActionResult Mine()
+        {
+            var userId = User.Identity.GetUserId();
+
+            var parties = _context.Parties
+                .Where(p => p.UserId == userId && p.DateTime > DateTime.Now)
+                .Include(pt => pt.PartyType)
+                .ToList();
+
+            return View(parties);
         }
 
         [Authorize]
@@ -71,7 +85,7 @@ namespace PartyApp.Controllers
             _context.Parties.Add(party);
             _context.SaveChanges();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Mine", "Parties");
         }
     }
 }

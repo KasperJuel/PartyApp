@@ -22,14 +22,14 @@
                     @party.PartyType.Name
                     @if (Model.ShowActions)
                     {
-                        <button class="btn btn-default btn-sm pull-right" id="toggle-attendance" data-party-id="@party.Id">Deltag?</button>
+                        <button class="btn btn-default btn-sm pull-right toggle-attendance" data-party-id="@party.Id">Deltag?</button>
                     }
                 </span>
                 <span class="user">
                     Afholdes af: @party.User.Name
                     @if (Model.ShowActions)
                     {
-                        <button class="btn btn-link btn-sm" id="toggle-follow" data-user-id="@party.UserId">Follow</button>
+                        <button class="btn btn-link btn-sm toggle-follow" data-user-id="@party.UserId">Follow</button>
                     }
                 </span>
             </div>
@@ -39,32 +39,34 @@
 
 @section scripts {
     <script>
-        $(document).ready(function () {
-            $("#toggle-attendance").click(function (e) {
+        $(document).ready(function() {
+            $(".toggle-attendance").click(function (e) {
                 var button = $(e.target);
 
                 $.post("/api/attendances", { partyId: button.attr("data-party-id") })
-                .done(function () {
-                    button
-                        .removeClass("btn-default")
-                        .addClass("btn-info")
-                        .text("Deltager");
-                })
-                .fail(function () {
-                    alert("Noget gik galt.");
-                });
+                    .done(function () {
+                        button
+                            .removeClass("btn-default")
+                            .addClass("btn-info")
+                            .text("Deltager");
+                        console.log("Working!");
+                    })
+                    .fail(function () {
+                        alert("Noget gik galt.");
+                    });
             });
 
-            $("#toggle-follow").click(function (e) {
+            $(".toggle-follow").click(function (e) {
                 var button = $(e.target);
 
                 $.post("/api/followings", { followeeId: button.attr("data-user-id") })
-                .done(function () {
-                    button.text("Following");
-                })
-                .fail(function () {
-                    alert("Noget gik galt.");
-                });
+                    .done(function () {
+                        button.text("Following");
+                        console.log("Working!");
+                    })
+                    .fail(function () {
+                        alert("Noget gik galt.");
+                    });
             });
         });
     </script>
