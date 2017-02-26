@@ -1,12 +1,13 @@
 ﻿@model PartyApp.ViewModels.PartyFormViewModel
 @{
-    ViewBag.Title = "Opret";
+    ViewBag.Title = Model.Heading;
 }
 
-<h2>Opret en Fest</h2>
-@using (Html.BeginForm("Create", "Parties"))
+<h2>@Model.Heading</h2>
+@using (Html.BeginForm(Model.Action, "Parties"))
 {
     @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Id)
     <form>
         <div class="form-group">
             @Html.LabelFor(m => m.Location)

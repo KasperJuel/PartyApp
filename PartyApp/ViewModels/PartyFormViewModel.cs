@@ -8,6 +8,8 @@ namespace PartyApp.ViewModels
 {
     public class PartyFormViewModel
     {
+        public int Id { get; set; }
+
         [Required]
         public string Location { get; set; }
 
@@ -23,6 +25,16 @@ namespace PartyApp.ViewModels
         public byte PartyType { get; set; }
 
         public IEnumerable<PartyType> PartyTypes { get; set; }
+
+        public string Heading { get; set; }
+
+        public string Action
+        {
+            get
+            {
+                return (Id != 0) ? "Update" : "Create";
+            }
+        }
 
         public DateTime GetDateTime()
         {

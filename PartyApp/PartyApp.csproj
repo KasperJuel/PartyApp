@@ -334,7 +334,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Parties\Create.cshtml" />
+    <Content Include="Views\Parties\PartyForm.cshtml" />
     <Content Include="Views\Parties\Mine.cshtml" />
   </ItemGroup>
   <ItemGroup>

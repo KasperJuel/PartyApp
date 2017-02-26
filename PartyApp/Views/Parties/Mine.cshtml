@@ -22,12 +22,13 @@
             <div class="details">
                 <span class="party-type">
                     @party.PartyType.Name
-                        <button class="btn btn-default btn-sm pull-right" id="toggle-attendance" data-party-id="@party.Id">Deltag?</button>
                 </span>
                 <span class="user">
                     By: @party.Location
-                    <button class="btn btn-link btn-sm" id="toggle-follow" data-user-id="@party.UserId">Follow</button>
                 </span>
+                <div class="actions">
+                    <a href="@Url.Action("Edit", "Parties", new { id = party.Id })">Rediger</a>
+                </div>
             </div>
         </li>
     }

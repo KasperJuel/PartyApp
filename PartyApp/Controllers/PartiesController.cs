@@ -57,10 +57,31 @@ namespace PartyApp.Controllers
         {
             var model = new PartyFormViewModel
             {
-                PartyTypes = _context.PartyTypes.ToList()
+                PartyTypes = _context.PartyTypes.ToList(),
+                Heading = "Opret Fest"
             };
 
-            return View(model);
+            return View("PartyForm", model);
+        }
+
+        [Authorize]
+        public ActionResult Edit(int id)
+        {
+            var userId = User.Identity.GetUserId();
+            var party = _context.Parties.Single(p => p.Id == id && p.UserId == userId);
+
+            var model = new PartyFormViewModel
+            {
+                Heading = "Rediger Fest",
+                Id = party.Id,
+                PartyTypes = _context.PartyTypes.ToList(),
+                Date = party.DateTime.ToString("d MMM yyyy"),
+                Time = party.DateTime.ToString("HH:mm"),
+                PartyType = party.PartyTypeId,
+                Location = party.Location
+            };
+
+            return View("PartyForm", model);
         }
 
         [Authorize]
@@ -71,7 +92,7 @@ namespace PartyApp.Controllers
             if (!ModelState.IsValid)
             {
                 model.PartyTypes = _context.PartyTypes.ToList();
-                return View("Create", model);
+                return View("PartyForm", model);
             }
 
             var party = new Party
@@ -83,6 +104,29 @@ namespace PartyApp.Controllers
             };
 
             _context.Parties.Add(party);
+            _context.SaveChanges();
+
+            return RedirectToAction("Mine", "Parties");
+        }
+
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Update(PartyFormViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                model.PartyTypes = _context.PartyTypes.ToList();
+                return View("PartyForm", model);
+            }
+
+            var userId = User.Identity.GetUserId();
+            var party = _context.Parties.Single(p => p.Id == model.Id && p.UserId == userId);
+
+            party.Location = model.Location;
+            party.DateTime = model.GetDateTime();
+            party.PartyTypeId = model.PartyType;
+
             _context.SaveChanges();
 
             return RedirectToAction("Mine", "Parties");

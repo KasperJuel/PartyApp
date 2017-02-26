@@ -68,3 +68,12 @@ textarea {
     font-size: 13px;
     padding-top: 11px;
 }
+
+/*.parties > li .actions {
+    font-size: 13px;
+    display: none;
+}
+
+.parties > li:hover .actions {
+    display: block
+}*/
