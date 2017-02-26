@@ -181,6 +181,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Api\PartiesController.cs" />
     <Compile Include="Controllers\AttendancesController.cs" />
     <Compile Include="Controllers\FollowingsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -218,6 +219,10 @@
     <Compile Include="Migrations\201702231537337_AddFollowing.cs" />
     <Compile Include="Migrations\201702231537337_AddFollowing.Designer.cs">
       <DependentUpon>201702231537337_AddFollowing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702261354321_AddIsCanceledToParty.cs" />
+    <Compile Include="Migrations\201702261354321_AddIsCanceledToParty.Designer.cs">
+      <DependentUpon>201702261354321_AddIsCanceledToParty.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -368,6 +373,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201702231537337_AddFollowing.resx">
       <DependentUpon>201702231537337_AddFollowing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702261354321_AddIsCanceledToParty.resx">
+      <DependentUpon>201702261354321_AddIsCanceledToParty.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

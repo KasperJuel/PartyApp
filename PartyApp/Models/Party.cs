@@ -20,5 +20,7 @@ namespace PartyApp.Models
         [Required]
         public byte PartyTypeId { get; set; }
         public PartyType PartyType { get; set; }
+
+        public bool IsCanceled { get; set; }
     }
 }
