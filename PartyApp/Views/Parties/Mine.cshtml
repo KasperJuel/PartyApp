@@ -31,7 +31,7 @@
                         Rediger
                     </a> |
                     <a href="#" class="cancel-party" data-party-id="@party.Id">
-                        Cancel
+                        Aflys Fest
                     </a>
                 </div>
             </div>
@@ -45,21 +45,38 @@
             $(".cancel-party").click(function (e) {
                 var link = $(e.target);
 
-                if (confirm("Er du sikker på du vil slette denne fest?")) {
-                    $.ajax({
-                        url: "/api/parties/" + link.attr("data-party-id"),
-                        method: "DELETE"
-                    })
-                    .done(function () {
-                        link.parents("li").fadeOut(function () {
-                            $(this).remove();
-                        });
-                    })
-                    .fail(function () {
-                        alert("Noget gik galt.");
-                    });
-                }
+                bootbox.dialog({
+                    message: "Er du sikker på du vil aflyse denne fest?",
+                    title: "Confirm",
+                    buttons: {
+                        no: {
+                            label: "Nej",
+                            className: "btn-default",
+                            callback: function () {
+                                bootbox.hideAll();
+                            }
+                        },
+                        yes: {
+                            label: "Ja",
+                            className: "btn-danger",
+                            callback: function () {
+                                $.ajax({
+                                    url: "/api/parties/" + link.attr("data-party-id"),
+                                    method: "DELETE"
+                                })
+                                .done(function () {
+                                    link.parents("li").fadeOut(function () {
+                                        $(this).remove();
+                                    });
+                                })
+                                .fail(function () {
+                                    alert("Noget gik galt.");
+                                });
+                            }
+                        }
+                    }
+                });
             });
-        })
+        });
     </script>
 }
