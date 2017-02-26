@@ -4,7 +4,7 @@ using PartyApp.Models;
 using System.Linq;
 using System.Web.Http;
 
-namespace PartyApp.Controllers
+namespace PartyApp.Controllers.Api
 {
     [Authorize]
     public class FollowingsController : ApiController

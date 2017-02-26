@@ -45,7 +45,7 @@ namespace PartyApp.Controllers
             var userId = User.Identity.GetUserId();
 
             var parties = _context.Parties
-                .Where(p => p.UserId == userId && p.DateTime > DateTime.Now)
+                .Where(p => p.UserId == userId && p.DateTime > DateTime.Now && !p.IsCanceled)
                 .Include(pt => pt.PartyType)
                 .ToList();
 

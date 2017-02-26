@@ -21,6 +21,9 @@ namespace PartyApp.Controllers.Api
             var userId = User.Identity.GetUserId();
             var party = _context.Parties.Single(p => p.Id == id && p.UserId == userId);
 
+            if (party.IsCanceled)
+                return NotFound();
+
             party.IsCanceled = true;
 
             _context.SaveChanges();

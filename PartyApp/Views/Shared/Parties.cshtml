@@ -20,13 +20,18 @@
             <div class="details">
                 <span class="party-type">
                     @party.PartyType.Name
-                    @if (Model.ShowActions)
+                    @if (Model.ShowActions && !party.IsCanceled)
                     {
                         <button class="btn btn-default btn-sm pull-right toggle-attendance" data-party-id="@party.Id">Deltag?</button>
                     }
                 </span>
                 <span class="user">
                     Afholdes af: @party.User.Name
+
+                    @if (party.IsCanceled)
+                    {
+                        <span class="label label-warning">Aflyst!</span>
+                    }
                     @if (Model.ShowActions)
                     {
                         <button class="btn btn-link btn-sm toggle-follow" data-user-id="@party.UserId">Follow</button>
