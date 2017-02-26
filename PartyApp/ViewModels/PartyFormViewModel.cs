@@ -1,8 +1,11 @@
 ﻿using FindFesten.ViewModels;
+using PartyApp.Controllers;
 using PartyApp.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq.Expressions;
+using System.Web.Mvc;
 
 namespace PartyApp.ViewModels
 {
@@ -32,7 +35,13 @@ namespace PartyApp.ViewModels
         {
             get
             {
-                return (Id != 0) ? "Update" : "Create";
+                Expression<Func<PartiesController, ActionResult>> update = (c => c.Update(this));
+
+                Expression<Func<PartiesController, ActionResult>> create = (c => c.Create(this));
+
+                var action = (Id != 0) ? update : create;
+
+                return (action.Body as MethodCallExpression).Method.Name;
             }
         }
 
