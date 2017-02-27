@@ -44,5 +44,19 @@ namespace PartyApp.Models
                 attendee.Notify(notification);
             }
         }
+
+        public void Modify(DateTime dateTime, string location, byte partyType)
+        {
+            var notification = new Notification(NotificationType.PartyUpdated, this);
+            notification.OriginalDateTime = DateTime;
+            notification.OriginalLocation = Location;
+
+            Location = location;
+            DateTime = dateTime;
+            PartyTypeId = partyType;
+
+            foreach (var attendee in Attendances.Select(a => a.Attendee))
+                attendee.Notify(notification);
+        }
     }
 }

@@ -121,11 +121,15 @@ namespace PartyApp.Controllers
             }
 
             var userId = User.Identity.GetUserId();
-            var party = _context.Parties.Single(p => p.Id == model.Id && p.UserId == userId);
+            var party = _context.Parties
+                .Include(p => p.Attendances.Select(a => a.Attendee))
+                .Single(p => p.Id == model.Id && p.UserId == userId);
 
-            party.Location = model.Location;
-            party.DateTime = model.GetDateTime();
-            party.PartyTypeId = model.PartyType;
+            party.Modify(model.GetDateTime(), model.Location, model.PartyType);
+
+            //party.Location = model.Location;
+            //party.DateTime = model.GetDateTime();
+            //party.PartyTypeId = model.PartyType;
 
             _context.SaveChanges();
 
