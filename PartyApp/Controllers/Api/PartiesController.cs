@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using PartyApp.Models;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Http;
 
@@ -19,24 +20,14 @@ namespace PartyApp.Controllers.Api
         public IHttpActionResult Cancel(int id)
         {
             var userId = User.Identity.GetUserId();
-            var party = _context.Parties.Single(p => p.Id == id && p.UserId == userId);
+            var party = _context.Parties
+                .Include(p => p.Attendances.Select(a => a.Attendee))
+                .Single(p => p.Id == id && p.UserId == userId);
 
             if (party.IsCanceled)
                 return NotFound();
 
-            party.IsCanceled = true;
-
-            var notification = new Notification(NotificationType.PartyCanceled, party);
-
-            var attendees = _context.Attendances
-                .Where(a => a.PartyId == party.Id)
-                .Select(a => a.Attendee)
-                .ToList();
-
-            foreach (var attendee in attendees)
-            {
-                attendee.Notify(notification);
-            }
+            party.Cancel();
 
             _context.SaveChanges();
 
