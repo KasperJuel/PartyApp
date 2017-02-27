@@ -6,10 +6,14 @@ namespace PartyApp.Models
     public class Notification
     {
         public int Id { get; private set; }
+
         public DateTime DateTime { get; private set; }
+
         public NotificationType Type { get; private set; }
-        public DateTime? OriginalDateTime { get; set; }
-        public string OriginalLocation { get; set; }
+
+        public DateTime? OriginalDateTime { get; private set; }
+
+        public string OriginalLocation { get; private set; }
 
         [Required]
         public Party Party { get; private set; }
@@ -18,7 +22,7 @@ namespace PartyApp.Models
         {
         }
 
-        public Notification(NotificationType type, Party party)
+        private Notification(NotificationType type, Party party)
         {
             if (party == null)
                 throw new ArgumentNullException("party");
@@ -26,6 +30,25 @@ namespace PartyApp.Models
             Type = type;
             Party = party;
             DateTime = DateTime.Now;
+        }
+
+        public static Notification PartyCreated(Party party)
+        {
+            return new Notification(NotificationType.PartyCreated, party);
+        }
+
+        public static Notification PartyUpdated(Party newParty, DateTime originalDateTime, string originalLocation)
+        {
+            var notification = new Notification(NotificationType.PartyUpdated, newParty);
+            notification.OriginalDateTime = originalDateTime;
+            notification.OriginalLocation = originalLocation;
+
+            return notification;
+        }
+
+        public static Notification PartyCanceled(Party party)
+        {
+            return new Notification(NotificationType.PartyCanceled, party);
         }
     }
 }

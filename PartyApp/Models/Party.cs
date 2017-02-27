@@ -37,7 +37,7 @@ namespace PartyApp.Models
         {
             IsCanceled = true;
 
-            var notification = new Notification(NotificationType.PartyCanceled, this);
+            var notification = Notification.PartyCanceled(this);
 
             foreach (var attendee in Attendances.Select(a => a.Attendee))
             {
@@ -47,9 +47,7 @@ namespace PartyApp.Models
 
         public void Modify(DateTime dateTime, string location, byte partyType)
         {
-            var notification = new Notification(NotificationType.PartyUpdated, this);
-            notification.OriginalDateTime = DateTime;
-            notification.OriginalLocation = Location;
+            var notification = Notification.PartyUpdated(this, DateTime, Location);
 
             Location = location;
             DateTime = dateTime;

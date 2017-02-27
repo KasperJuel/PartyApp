@@ -127,10 +127,6 @@ namespace PartyApp.Controllers
 
             party.Modify(model.GetDateTime(), model.Location, model.PartyType);
 
-            //party.Location = model.Location;
-            //party.DateTime = model.GetDateTime();
-            //party.PartyTypeId = model.PartyType;
-
             _context.SaveChanges();
 
             return RedirectToAction("Mine", "Parties");
