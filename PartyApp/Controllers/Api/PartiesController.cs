@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
 using PartyApp.Models;
-using System;
 using System.Linq;
 using System.Web.Http;
 
@@ -27,12 +26,7 @@ namespace PartyApp.Controllers.Api
 
             party.IsCanceled = true;
 
-            var notification = new Notification
-            {
-                DateTime = DateTime.Now,
-                Party = party,
-                Type = NotificationType.PartyCanceled
-            };
+            var notification = new Notification(NotificationType.PartyCanceled, party);
 
             var attendees = _context.Attendances
                 .Where(a => a.PartyId == party.Id)
@@ -41,13 +35,7 @@ namespace PartyApp.Controllers.Api
 
             foreach (var attendee in attendees)
             {
-                var userNotification = new UserNotification
-                {
-                    User = attendee,
-                    Notification = notification
-                };
-
-                _context.UserNotifications.Add(userNotification);
+                attendee.Notify(notification);
             }
 
             _context.SaveChanges();
