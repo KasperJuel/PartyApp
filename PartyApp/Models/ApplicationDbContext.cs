@@ -27,7 +27,8 @@ namespace PartyApp.Models
         {
             modelBuilder.Entity<Attendance>()
                 .HasRequired(a => a.Party)
-                .WithMany().WillCascadeOnDelete(false);
+                .WithMany(p => p.Attendances)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<ApplicationUser>()
                 .HasMany(u => u.Followers)
@@ -41,7 +42,7 @@ namespace PartyApp.Models
 
             modelBuilder.Entity<UserNotification>()
                 .HasRequired(n => n.User)
-                .WithMany()
+                .WithMany(u => u.UserNotifications)
                 .WillCascadeOnDelete(false);
 
             base.OnModelCreating(modelBuilder);
