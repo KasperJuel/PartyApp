@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using PartyApp.Models;
+using System;
 using System.Linq;
 using System.Web.Http;
 
@@ -25,6 +26,29 @@ namespace PartyApp.Controllers.Api
                 return NotFound();
 
             party.IsCanceled = true;
+
+            var notification = new Notification
+            {
+                DateTime = DateTime.Now,
+                Party = party,
+                Type = NotificationType.PartyCanceled
+            };
+
+            var attendees = _context.Attendances
+                .Where(a => a.PartyId == party.Id)
+                .Select(a => a.Attendee)
+                .ToList();
+
+            foreach (var attendee in attendees)
+            {
+                var userNotification = new UserNotification
+                {
+                    User = attendee,
+                    Notification = notification
+                };
+
+                _context.UserNotifications.Add(userNotification);
+            }
 
             _context.SaveChanges();
 

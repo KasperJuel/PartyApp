@@ -224,6 +224,10 @@
     <Compile Include="Migrations\201702261354321_AddIsCanceledToParty.Designer.cs">
       <DependentUpon>201702261354321_AddIsCanceledToParty.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702271032323_AddNotification.cs" />
+    <Compile Include="Migrations\201702271032323_AddNotification.Designer.cs">
+      <DependentUpon>201702271032323_AddNotification.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -231,8 +235,11 @@
     <Compile Include="Models\Attendance.cs" />
     <Compile Include="Models\Following.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Notification.cs" />
+    <Compile Include="Models\NotificationType.cs" />
     <Compile Include="Models\Party.cs" />
     <Compile Include="Models\PartyType.cs" />
+    <Compile Include="Models\UserNotification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\FutureDate.cs" />
@@ -377,6 +384,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201702261354321_AddIsCanceledToParty.resx">
       <DependentUpon>201702261354321_AddIsCanceledToParty.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702271032323_AddNotification.resx">
+      <DependentUpon>201702271032323_AddNotification.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
